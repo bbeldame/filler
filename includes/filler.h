@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 22:36:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/07/13 19:40:00 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/07/13 21:33:55 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct	s_filler
 {
 	int		player;
 	char	letter;
-}				s_fill;
+}				t_filler;
 
 int			get_next_line(int const fd, char **line);
+void		parse_player(t_filler *fill, char *str);
