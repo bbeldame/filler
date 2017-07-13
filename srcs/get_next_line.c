@@ -1,0 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/21 17:50:07 by msakwins          #+#    #+#             */
+/*   Updated: 2017/07/12 19:04:56 by msakwins         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <unistd.h>
+#include <stdio.h>
+#include "../includes/filler.h"
+
+static int		still_full(char **full, char **line)
+{
+	char			*tmp;
+	char			*tmp2;
+
+	if ((tmp = ft_strchr(*full, '\n')))
+	{
+		*tmp = '\0';
+		tmp++;
+		*line = ft_strdup(*full);
+		tmp2 = ft_strdup(tmp);
+		ft_strdel(full);
+		*full = ft_strdup(tmp2);
+		ft_strdel(&tmp2);
+		return (1);
+	}
+	if (!(tmp = ft_strchr(*full, '\n')) && (ft_strlen(*full) > 0))
+	{
+		*line = ft_strdup(*full);
+		ft_strclr(*full);
+		return (1);
+	}
+	return (0);
+}
+
+int				get_next_line(int const fd, char **line)
+{
+	static char		*full[10420];
+	char			buff[BUFF_SIZE + 1];
+	int				ret;
+
+	if (line == NULL || fd < 0 || BUFF_SIZE < 1)
+		return (-1);
+	while (!(ft_strchr(full[fd], '\n')) &&
+					((ret = read(fd, buff, BUFF_SIZE)) > 0))
+	{
+		buff[ret] = '\0';
+		full[fd] = ft_strjoin(full[fd], buff);
+	}
+	if (ret == -1)
+		return (-1);
+	if (ret == 0 && !(full[fd]))
+		return (0);
+	if (still_full(&full[fd], line))
+		return (1);
+	return (0);
+}

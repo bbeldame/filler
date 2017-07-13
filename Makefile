@@ -9,7 +9,8 @@ OBJDIR = ./obj/
 INCDIR = ./includes
 SRCDIR = ./srcs/
 
-SRCS_NAME = filler.c
+SRCS_NAME = filler.c \
+			get_next_line.c \
 
 OBJS = $(addprefix $(OBJDIR),$(SRCS_NAME:.c=.o))
 LIBFT = $(addprefix $(LIBFTDIR)/,$(LIBFTA))
