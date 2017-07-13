@@ -1,49 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   filler.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 22:36:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/07/13 20:59:27 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/07/14 00:43:23 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
+void		loop(t_fill *env)
+{
+	char	*str;
+
+	get_next_line(0, &str);
+	write(env->fd, str, ft_strlen(str));
+	write(env->fd, "\n", 2);
+	parse_board(env, str);
+	get_next_line(0, &str);
+	parse_piece(env, str);
+	ft_putstr("8 2\n");
+	ft_putstr_fd("FIRST ROUND OVER\n", env->fd);
+}
+
 int			main()
 {
-	int		fd;
-	int		ret;
-	char	buf[99999 + 1];
-	char	**tab;
-	int		player;
-	int		i;
+	char	*line;
+	t_fill	*env;
 
-	i = 0;
-	player = 0;
-	fd = open("filler.log", O_WRONLY | O_CREAT);
-	ret = read(0, buf, 99999);
-	buf[ret] = '\0';
-	write(fd, "-----\n", 7);
-	tab = ft_strsplit(buf, '\n');
-	while (tab[i] != '\0')
+	env = (t_fill *)semalloc(sizeof(t_fill));
+	env->map_y = 0;
+	env->map_x = 0;
+	env->fd = open("filler.log", O_WRONLY | O_CREAT);
+	get_next_line(0, &line);
+	parse_player(env, line);
+	write(env->fd, "-----\n", 7);
+	if (env->player == 1)
+		ft_putstr_fd("IM THE 1ST PLAYER\n", env->fd);
+	else if (env->player == 2)
+		write(env->fd, "fuck\n", 5);
+	while (1)
 	{
-		if (**tab == '\0' || **tab == '\n')
-			write(fd, "\n", 2);
-		write(fd, tab[i], (ft_strlen(tab[i])));
-		write(fd, "\n", 2);
-		i++;
+		loop(env);
 	}
-	player = tab[1][10] == 1 ? 1 : 2;
-	write(fd, "-----\n", 7);
-	if (player == 1)
-		write(fd, "IM THE FIRST PLAYER\n", 21);
-	else if (player == 2)
-		write(fd, "fuck\n", 5);
-	close(fd);
-	ft_putstr("8 3\n");
-	ft_putstr("8 5\n");
+	close(env->fd);
 	return (0);
 }

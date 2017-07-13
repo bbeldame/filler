@@ -3,61 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/21 17:50:07 by msakwins          #+#    #+#             */
-/*   Updated: 2017/07/12 19:04:56 by msakwins         ###   ########.fr       */
+/*   Created: 2016/11/16 19:10:54 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/07/13 22:25:26 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
 #include "../includes/filler.h"
 
-static int		still_full(char **full, char **line)
+int		cs(const char *str)
 {
-	char			*tmp;
-	char			*tmp2;
+	int i;
 
-	if ((tmp = ft_strchr(*full, '\n')))
+	i = 0;
+	while (str[i])
 	{
-		*tmp = '\0';
-		tmp++;
-		*line = ft_strdup(*full);
-		tmp2 = ft_strdup(tmp);
-		ft_strdel(full);
-		*full = ft_strdup(tmp2);
-		ft_strdel(&tmp2);
-		return (1);
+		if (str[i] == '\n' || !str[i])
+			return (i);
+		i++;
 	}
-	if (!(tmp = ft_strchr(*full, '\n')) && (ft_strlen(*full) > 0))
-	{
-		*line = ft_strdup(*full);
-		ft_strclr(*full);
-		return (1);
-	}
-	return (0);
+	return (-1);
 }
 
-int				get_next_line(int const fd, char **line)
+char	*dumpstr(char *str)
 {
-	static char		*full[10420];
-	char			buff[BUFF_SIZE + 1];
-	int				ret;
+	char *new;
 
-	if (line == NULL || fd < 0 || BUFF_SIZE < 1)
-		return (-1);
-	while (!(ft_strchr(full[fd], '\n')) &&
-					((ret = read(fd, buff, BUFF_SIZE)) > 0))
-	{
-		buff[ret] = '\0';
-		full[fd] = ft_strjoin(full[fd], buff);
-	}
-	if (ret == -1)
-		return (-1);
-	if (ret == 0 && !(full[fd]))
+	new = (char *)malloc(sizeof(char) * (ft_strlen(str) - cs(str)));
+	if (!new)
 		return (0);
-	if (still_full(&full[fd], line))
-		return (1);
-	return (0);
+	new = ft_strncpy(new, str + cs(str) + 1, ft_strlen(str) - cs(str));
+	ft_bzero(str, ft_strlen(str));
+	free(str);
+	str = NULL;
+	return (new);
+}
+
+int		fullfillline(char ****line, char **newline)
+{
+	if (!(***line = (char *)malloc(sizeof(char) * (ft_strlen(*newline) + 1))))
+		return (0);
+	ft_strcpy(***line, *newline);
+	free(*newline);
+	return (1);
+}
+
+int		processline(int ret, char **str, char ***line)
+{
+	char *newline;
+
+	if (!ret && cs(*str) == -1)
+	{
+		if (!ft_strlen(*str))
+			return (0);
+		if (!(newline = (char *)malloc(sizeof(char) * ft_strlen(*str) + 1)))
+			return (-1);
+		ft_strcpy(newline, *str);
+		free(*str);
+		*str = ft_strdup(*str + ft_strlen(*str));
+		if (!fullfillline(&line, &newline))
+			return (-1);
+	}
+	else
+	{
+		if (!(newline = (char *)malloc(sizeof(char) * cs(*str) + 1)))
+			return (-1);
+		ft_strncpy(newline, *str, cs(*str) + 1);
+		newline[cs(*str)] = '\0';
+		*str = dumpstr(*str);
+		if (!fullfillline(&line, &newline))
+			return (-1);
+	}
+	return (1);
+}
+
+int		get_next_line(const int fd, char **line)
+{
+	char			buffer[BUFF_SIZE + 1];
+	int				ret;
+	static char		*str[NBMAXFD];
+	char			*swap;
+
+	ret = 1;
+	if (!line || fd > NBMAXFD || fd < 0 || BUFF_SIZE < 1)
+		return (-1);
+	if (!str[fd])
+	{
+		if (!(str[fd] = (char *)malloc(sizeof(char) * BUFF_SIZE)))
+			return (-1);
+		ft_bzero(str[fd], BUFF_SIZE);
+	}
+	while (cs(str[fd]) == -1 && ret)
+	{
+		if ((ret = read(fd, buffer, BUFF_SIZE)) == -1)
+			return (-1);
+		buffer[ret] = '\0';
+		swap = ft_strdup(str[fd]);
+		ft_strdel(&str[fd]);
+		str[fd] = ft_strjoin(swap, buffer);
+		ft_strdel(&swap);
+	}
+	return (processline(ret, &str[fd], &line));
 }

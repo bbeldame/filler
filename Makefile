@@ -1,6 +1,6 @@
 NAME = msakwins.filler
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra #-Werror
 	
 LIBFTA = libft.a
 
@@ -11,6 +11,9 @@ SRCDIR = ./srcs/
 
 SRCS_NAME = filler.c \
 			get_next_line.c \
+			utils.c \
+			parse.c \
+			parse_specific.c \
 
 OBJS = $(addprefix $(OBJDIR),$(SRCS_NAME:.c=.o))
 LIBFT = $(addprefix $(LIBFTDIR)/,$(LIBFTA))
