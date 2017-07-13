@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 22:36:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/07/13 21:35:35 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/07/13 21:44:45 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,7 @@ int			main()
 	if (fill == NULL)
 		return (0);
 	fd = open("filler.log", O_WRONLY | O_CREAT);
-	ret = read(0, buf, 99999);
 	buf[ret] = '\0';
-	write(fd, "-----\n", 7);
-	tab = ft_strsplit(buf, '\n');
-	while (tab[i] != '\0')
-	{
-		if (**tab == '\0' || **tab == '\n')
-			write(fd, "\n", 2);
-		write(fd, tab[i], (ft_strlen(tab[i])));
-		write(fd, "\n", 2);
-		i++;
-	}
 	parse_player(fill, tab[0]);
 	if (fill->player == 1)
 		write(fd, "IM THE FIRST PLAYER\n", 21);
