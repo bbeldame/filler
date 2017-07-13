@@ -1,0 +1,5 @@
+*.o
+*.a
+filler.log
+filler.trace
+*.txt
