@@ -6,24 +6,49 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 00:33:29 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/14 00:39:22 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/15 23:51:46 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-char	*parse_board_line(t_fill *env, char *line)
+int		parse_char_to_int(t_fill *env, char c)
 {
-	char	*parsed_line;
+	if (c == '*')
+		return (1);
+	else if (c == 'O' || c == 'o')
+		return (env->player == 1) ? 1 : 2;
+	else if (c == 'X' || c == 'x')
+		return (env->player == 2) ? 1 : 2;
+	return (0);
+}
+
+int		*parse_piece_line(t_fill *env, char *line)
+{
+	int		*parsed_line;
 	int		i;
 	
-	parsed_line = (char *)malloc(sizeof(char) * env->map_x);
+	parsed_line = (int *)malloc(sizeof(int) * env->piece.max_x);
 	i = 0;
-	while (i < env->map_x)
+	while (i < env->piece.max_x)
 	{
-		parsed_line[i] = line[i + 4];
+		parsed_line[i] = parse_char_to_int(env, line[i]);
 		i++;
 	}
-	parsed_line[i] = '\0';
+	return parsed_line;
+}
+
+int		*parse_board_line(t_fill *env, char *line)
+{
+	int		*parsed_line;
+	int		i;
+	
+	parsed_line = (int *)malloc(sizeof(int) * env->board.max_x);
+	i = 0;
+	while (i < env->board.max_x)
+	{
+		parsed_line[i] = parse_char_to_int(env, line[i + 4]);
+		i++;
+	}
 	return parsed_line;
 }

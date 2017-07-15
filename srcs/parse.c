@@ -6,13 +6,30 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 21:33:08 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/14 00:40:03 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/16 00:35:39 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-void	parse_y_x_map(t_fill *env, char *str)
+/*
+** Trim the piece, from 00
+**						11
+**						00
+** it will return : 11
+** Basically it deletes every useless lines and columns from the piece
+*/
+
+int		**trim_piece(t_fill *env)
+{
+	return (env->fd); //todo
+}
+
+/*
+** Save the max y and max x of the map or piece
+*/
+
+void	parse_y_x(int *max_y, int *max_x, char *str)
 {
 	int		i;
 	char	*tmp;
@@ -22,97 +39,70 @@ void	parse_y_x_map(t_fill *env, char *str)
 	{
 		i++;
 	}
-	env->map_y = ft_atoi(str + i);
-	write(env->fd, "map_y is : ", 12);
-	write(env->fd, ft_itoa(env->map_y), 3);
-	write(env->fd, "\n", 2);
-	tmp = ft_itoa(env->map_y);
+	*max_y = ft_atoi(str + i);
+	tmp = ft_itoa(*max_y);
 	i += ft_strlen(tmp);
-	env->map_x = ft_atoi(str + i);
-
-	write(env->fd, "map_x is : ", 12);
-	write(env->fd, ft_itoa(env->map_x), 3);
-	write(env->fd, "\n", 2);
+	free(tmp);
+	*max_x = ft_atoi(str + i);
 }
 
-void	parse_y_x_piece(t_fill *env, char *str)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (!ft_isdigit(str[i]))
-	{
-		i++;
-	}
-	env->piece_y = ft_atoi(str + i);
-	write(env->fd, "piece_y is : ", 14);
-	write(env->fd, ft_itoa(env->piece_y), 2);
-	write(env->fd, "\n", 2);
-	tmp = ft_itoa(env->piece_y);
-	i += ft_strlen(tmp);
-	env->piece_x = ft_atoi(str + i);
-
-	write(env->fd, "piece_x is : ", 14);
-	write(env->fd, ft_itoa(env->piece_x), 2);
-	write(env->fd, "\n", 2);
-}
+/*
+** In the first line of the firs call
+** get the player number, one or two
+*/
 
 void	parse_player(t_fill *env, char *str)
 {
 	if (str[10] == '1')
-	{
 		env->player = 1;
-		env->letter = P1;
-	}
 	else if (str[10] == '2')
-	{
 		env->player = 2;
-		env->letter = P2;
-	}
 	else
 		err_found("bad player");
 }
+
+/*
+** Save the board as a **int, free the previous board on each call
+*/
 
 void	parse_board(t_fill *env, char *line)
 {
 	char	*str;
 	int		i;
-	
-	write(env->fd, line, ft_strlen(line));
-	write(env->fd, "\n", 2);
+
 	i = 0;
-	if (env->map_y == 0 || env->map_x == 0)
-		parse_y_x_map(env, line);
+	if (env->board.max_y == 0 || env->board.max_x == 0)
+		parse_y_x(&env->board.max_y, &env->board.max_x, line);
 	else
-		free(env->board);
+		free(env->board.tab);
 	get_next_line(0, &str); // useless line with "    0123456789.."
-	env->board = (char **)malloc(env->map_y);
-	while (i < env->map_y)
+	env->board.tab = (int **)malloc(sizeof(int *) * env->board.max_y);
+	while (i < env->board.max_y)
 	{
 		get_next_line(0, &str);
-		//env->board[i] = parse_board_line(env, str);
-		write(env->fd, str, ft_strlen(str));
-		write(env->fd, "\n", 2);
+		env->board.tab[i] = parse_board_line(env, str);
 		i++;
 	}
+	debug_print_map(env);
 }
+
+/*
+** Save the piece as a **int, free the previous piece on each call
+*/
 
 void	parse_piece(t_fill *env, char *line)
 {
 	char	*str;
 	int		i;
 
-	write(env->fd, line, ft_strlen(line));
-	write(env->fd, "\n", 2);	
 	i = 0;
-	parse_y_x_piece(env, line);
-	while (i < env->piece_y)
+	parse_y_x(&env->piece.max_y, &env->piece.max_x, line);
+	env->piece.tab = (int **)malloc(sizeof(int *) * env->piece.max_y);
+	while (i < env->piece.max_y)
 	{
 		get_next_line(0, &str);
-		write(env->fd, str, ft_strlen(str));
-		write(env->fd, "\n", 2);
+		env->piece.tab[i] = parse_piece_line(env, str);
 		i++;
 	}
-	ft_putstr_fd("PIECE PARSING OVER\n", env->fd);
+	debug_print_piece(env);
 }
