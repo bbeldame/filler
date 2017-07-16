@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 22:36:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/07/16 19:39:15 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/16 19:40:53 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		init(t_fill *env)
 	env->trimmed_piece.max_y = 0;
 }
 
-int			main()
+int			main(void)
 {
 	char	*line;
 	t_fill	env;

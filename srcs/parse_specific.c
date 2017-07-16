@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 00:33:29 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/16 18:44:23 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/16 19:42:16 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		*parse_piece_line(t_fill *env, char *line)
 {
 	int		*parsed_line;
 	int		i;
-	
+
 	parsed_line = (int *)malloc(sizeof(int) * env->piece.max_x);
 	i = 0;
 	while (i < env->piece.max_x)
@@ -35,14 +35,14 @@ int		*parse_piece_line(t_fill *env, char *line)
 		parsed_line[i] = parse_char_to_int(env, line[i]);
 		i++;
 	}
-	return parsed_line;
+	return (parsed_line);
 }
 
 int		*parse_board_line(t_fill *env, char *line)
 {
 	int		*parsed_line;
 	int		i;
-	
+
 	parsed_line = (int *)malloc(sizeof(int) * env->board.max_x);
 	i = 0;
 	while (i < env->board.max_x)
@@ -50,5 +50,5 @@ int		*parse_board_line(t_fill *env, char *line)
 		parsed_line[i] = parse_char_to_int(env, line[i + 4]);
 		i++;
 	}
-	return parsed_line;
+	return (parsed_line);
 }

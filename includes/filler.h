@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 22:10:41 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/16 19:12:51 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/16 19:43:29 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,20 @@ typedef struct	s_filler
 	t_mop		board;
 }				t_fill;
 
-void		free_board_or_piece(t_mop *mop);
-void		parse_player(t_fill *env, char *str);
-void		parse_board(t_fill *env, char *line);
-void		parse_piece(t_fill *env, char *line);
-int			*parse_board_line(t_fill *env, char *line);
-int			*parse_piece_line(t_fill *env, char *line);
+void			free_board_or_piece(t_mop *mop);
+void			parse_player(t_fill *env, char *str);
+void			parse_board(t_fill *env, char *line);
+void			parse_piece(t_fill *env, char *line);
+int				*parse_board_line(t_fill *env, char *line);
+int				*parse_piece_line(t_fill *env, char *line);
 
-/* Debug utils */
-void		debug_print_map(t_fill *env);
-void		debug_print_piece(t_fill *env);
-void		debug_new_round(t_fill *env);
-void		debug_init(t_fill *env);
+/*
+** Debug utils
+*/
+
+void			debug_print_map(t_fill *env);
+void			debug_print_piece(t_fill *env);
+void			debug_new_round(t_fill *env);
+void			debug_init(t_fill *env);
 
 #endif

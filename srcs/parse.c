@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 21:33:08 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/16 19:00:36 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/16 19:41:31 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	parse_player(t_fill *env, char *str)
 
 /*
 ** Save the board as a **int, free the previous board on each call
+** we make an empty gnl to get rid off "    0123456789"
 */
 
 void	parse_board(t_fill *env, char *line)
@@ -75,7 +76,7 @@ void	parse_board(t_fill *env, char *line)
 		parse_y_x(&env->board.max_y, &env->board.max_x, line);
 	else
 		free_board_or_piece(&env->board);
-	get_next_line(0, &str); // useless line with "    0123456789.."
+	get_next_line(0, &str);
 	env->board.tab = (int **)malloc(sizeof(int *) * env->board.max_y);
 	while (i < env->board.max_y)
 	{
