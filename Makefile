@@ -10,7 +10,6 @@ INCDIR = ./includes
 SRCDIR = ./srcs/
 
 SRCS_NAME = filler.c \
-			get_next_line.c \
 			utils.c \
 			parse.c \
 			parse_specific.c \

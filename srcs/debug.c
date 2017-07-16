@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/15 22:22:08 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/16 00:08:35 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/16 18:40:10 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,15 @@ void	debug_new_round(t_fill *env)
 	ft_putendl_fd("==============================================", env->fd);
 	ft_putendl_fd("================< NEW ROUND >=================", env->fd);
 	ft_putendl_fd("==============================================", env->fd);
+}
+
+void	debug_init(t_fill *env)
+{
+	ft_putendl_fd("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", env->fd);
+	ft_putendl_fd("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", env->fd);
+	ft_putendl_fd("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", env->fd);
+	ft_putendl_fd("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", env->fd);
+	ft_putendl_fd("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", env->fd);
+	ft_putendl_fd("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", env->fd);
+	ft_putendl_fd("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", env->fd);
 }

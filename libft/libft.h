@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 19:08:39 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/05/17 23:15:43 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/16 19:10:15 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+
+# define BUFF_SIZE 4032
+# define NBMAXFD 2
 
 typedef struct		s_list
 {
@@ -90,5 +93,10 @@ char				*ft_strrev(char *str);
 char				*ft_makesentence(const char *str);
 void				ft_putnbr_base(uintmax_t nb, char *base);
 char				*itoa_base(uintmax_t value, char *base);
+void				*semalloc(size_t size);
+int					len_of_tab(char **tab);
+void				err_found(char *str);
+void				free_splited_str(char **str);
+int					get_next_line(int const fd, char **line);
 
 #endif
