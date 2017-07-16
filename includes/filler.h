@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 22:10:41 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/16 19:10:12 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/16 19:12:51 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct	s_filler
 	t_mop		board;
 }				t_fill;
 
-int			get_next_line(int const fd, char **line);
 void		free_board_or_piece(t_mop *mop);
 void		parse_player(t_fill *env, char *str);
 void		parse_board(t_fill *env, char *line);
