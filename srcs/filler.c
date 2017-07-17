@@ -6,11 +6,30 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 22:36:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/07/16 19:40:53 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/17 18:23:56 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
+
+/*
+** Send the coordonate of the piece to the VM
+*/
+
+void		send_coor(int y, int x)
+{
+	char	*str_y;
+	char	*str_x;
+
+	str_y = ft_itoa(y);
+	str_x = ft_itoa(x);
+	ft_putstr(str_y);
+	ft_putchar(' ');
+	ft_putstr(str_x);
+	ft_putchar('\n');
+	free(str_y);
+	free(str_x);
+}
 
 void		loop(t_fill *env)
 {
@@ -22,7 +41,7 @@ void		loop(t_fill *env)
 	parse_board(env, str);
 	get_next_line(0, &str);
 	parse_piece(env, str);
-	ft_putstr("8 2\n");
+	send_coor(8, 2);
 }
 
 void		init(t_fill *env)
