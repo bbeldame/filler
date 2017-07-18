@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 22:36:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/07/18 18:37:20 by bbeldame         ###   ########.fr       */
+/*   Created: 2017/07/18 22:19:50 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/07/18 22:19:52 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		init(t_fill *env)
 	env->nb_loop = 0;
 	env->board.max_x = 0;
 	env->board.max_y = 0;
+	env->board.tab = NULL;
 	env->piece.max_x = 0;
 	env->piece.max_y = 0;
 	env->trimmed_piece.max_x = 0;
