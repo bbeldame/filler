@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 21:33:08 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/18 22:12:08 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/18 23:05:53 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,17 @@ void	parse_board(t_fill *env, char *line)
 	if (env->nb_loop == 1)
 	{
 		parse_y_x(&env->board.max_y, &env->board.max_x, line);
-		env->board.tab = (int **)malloc(sizeof(int *) * env->board.max_y);
+		if (!(env->board.tab = (int **)malloc(sizeof(int *)
+			* env->board.max_y)))
+			return ;
 	}
 	get_next_line(0, &str);
 	while (i < env->board.max_y)
 	{
 		get_next_line(0, &str);
 		env->board.tab[i] = parse_board_line(env, str, i);
+		if (env->board.tab[i] == NULL)
+			return ;
 		i++;
 	}
 	debug_print_map(env);
@@ -100,11 +104,14 @@ void	parse_piece(t_fill *env, char *line)
 	if (!(env->piece.max_y == 0 && env->piece.max_x == 0))
 		free_board_or_piece(&env->piece);
 	parse_y_x(&env->piece.max_y, &env->piece.max_x, line);
-	env->piece.tab = (int **)malloc(sizeof(int *) * env->piece.max_y);
+	if (!(env->piece.tab = (int **)malloc(sizeof(int *) * env->piece.max_y)))
+		return ;
 	while (i < env->piece.max_y)
 	{
 		get_next_line(0, &str);
 		env->piece.tab[i] = parse_piece_line(env, str);
+		if (env->piece.tab[i] == NULL)
+			return ;
 		i++;
 	}
 	debug_print_piece(env);
