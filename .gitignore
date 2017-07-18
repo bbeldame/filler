@@ -5,3 +5,4 @@ filler.trace
 *.txt
 msakwins.filler
 *.swp
+.DS_Store
