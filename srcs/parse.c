@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 21:33:08 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/18 23:05:53 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/23 00:32:11 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,17 @@ void	parse_board(t_fill *env, char *line)
 	i = 0;
 	if (env->nb_loop == 1)
 	{
-		parse_y_x(&env->board.max_y, &env->board.max_x, line);
-		if (!(env->board.tab = (int **)malloc(sizeof(int *)
-			* env->board.max_y)))
+		parse_y_x(&BOARD.max_y, &BOARD.max_x, line);
+		if (!(BOARD.tab = (int **)malloc(sizeof(int *)
+			* BOARD.max_y)))
 			return ;
 	}
 	get_next_line(0, &str);
-	while (i < env->board.max_y)
+	while (i < BOARD.max_y)
 	{
 		get_next_line(0, &str);
-		env->board.tab[i] = parse_board_line(env, str, i);
-		if (env->board.tab[i] == NULL)
+		BOARD.tab[i] = parse_board_line(env, str, i);
+		if (BOARD.tab[i] == NULL)
 			return ;
 		i++;
 	}
@@ -101,16 +101,16 @@ void	parse_piece(t_fill *env, char *line)
 	int		i;
 
 	i = 0;
-	if (!(env->piece.max_y == 0 && env->piece.max_x == 0))
-		free_board_or_piece(&env->piece);
-	parse_y_x(&env->piece.max_y, &env->piece.max_x, line);
-	if (!(env->piece.tab = (int **)malloc(sizeof(int *) * env->piece.max_y)))
+	if (!(PIECE.max_y == 0 && PIECE.max_x == 0))
+		free_board_or_piece(&PIECE);
+	parse_y_x(&PIECE.max_y, &PIECE.max_x, line);
+	if (!(PIECE.tab = (int **)malloc(sizeof(int *) * PIECE.max_y)))
 		return ;
-	while (i < env->piece.max_y)
+	while (i < PIECE.max_y)
 	{
 		get_next_line(0, &str);
-		env->piece.tab[i] = parse_piece_line(env, str);
-		if (env->piece.tab[i] == NULL)
+		PIECE.tab[i] = parse_piece_line(env, str);
+		if (PIECE.tab[i] == NULL)
 			return ;
 		i++;
 	}

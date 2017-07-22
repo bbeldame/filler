@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 00:33:29 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/18 23:00:54 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/23 00:32:08 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int		*parse_piece_line(t_fill *env, char *line)
 	int		*parsed_line;
 	int		i;
 
-	if (!(parsed_line = (int *)malloc(sizeof(int) * env->piece.max_x)))
+	if (!(parsed_line = (int *)malloc(sizeof(int) * PIECE.max_x)))
 		return (NULL);
 	i = 0;
-	while (i < env->piece.max_x)
+	while (i < PIECE.max_x)
 	{
 		parsed_line[i] = parse_char_to_int(env, line[i]);
 		i++;
@@ -46,13 +46,13 @@ int		*parse_board_line(t_fill *env, char *line, int index)
 
 	if (env->nb_loop == 1)
 	{
-		if (!(parsed_line = (int *)malloc(sizeof(int) * env->board.max_x)))
+		if (!(parsed_line = (int *)malloc(sizeof(int) * BOARD.max_x)))
 			return (NULL);
 	}
 	else
-		parsed_line = env->board.tab[index];
+		parsed_line = BOARD.tab[index];
 	i = 0;
-	while (i < env->board.max_x)
+	while (i < BOARD.max_x)
 	{
 		parsed_line[i] = parse_char_to_int(env, line[i + 4]);
 		i++;

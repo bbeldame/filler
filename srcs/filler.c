@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/18 22:19:50 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/18 22:19:52 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/23 00:32:08 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void		send_coor(int y, int x)
 
 void		loop(t_fill *env)
 {
-	char	*str;
+	char		*str;
+	t_choice	choice;
 
 	env->nb_loop += 1;
 	debug_new_round(env);
@@ -34,17 +35,18 @@ void		loop(t_fill *env)
 	parse_board(env, str);
 	get_next_line(0, &str);
 	parse_piece(env, str);
-	send_coor(8, 2);
+	choice = find_placement(env);
+	send_coor(choice.y, choice.x);
 }
 
 void		init(t_fill *env)
 {
 	env->nb_loop = 0;
-	env->board.max_x = 0;
-	env->board.max_y = 0;
-	env->board.tab = NULL;
-	env->piece.max_x = 0;
-	env->piece.max_y = 0;
+	BOARD.max_x = 0;
+	BOARD.max_y = 0;
+	BOARD.tab = NULL;
+	PIECE.max_x = 0;
+	PIECE.max_y = 0;
 	env->trimmed_piece.max_x = 0;
 	env->trimmed_piece.max_y = 0;
 }

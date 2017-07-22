@@ -14,6 +14,7 @@ SRCS_NAME = filler.c \
 			parse.c \
 			parse_specific.c \
 			debug.c \
+			engine.c
 
 OBJS = $(addprefix $(OBJDIR),$(SRCS_NAME:.c=.o))
 LIBFT = $(addprefix $(LIBFTDIR)/,$(LIBFTA))
