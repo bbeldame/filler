@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 22:10:41 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/23 00:54:01 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/25 20:30:44 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 
-# define BUFF_SIZE 4032
-# define NBMAXFD 2
 # define BOARD env->board
 # define PIECE env->piece
 
@@ -28,7 +26,7 @@ typedef struct	s_choice
 {
 	int			y;
 	int			x;
-	int			score;
+	int			dist;
 }				t_choice;
 
 typedef	struct	s_map_or_piece
@@ -38,8 +36,6 @@ typedef	struct	s_map_or_piece
 	int			max_y;
 	int			current_x;
 	int			current_y;
-	int			on_zero_x;
-	int			on_zero_y;
 }				t_mop;
 
 typedef struct	s_filler

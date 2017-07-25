@@ -6,7 +6,7 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/12 18:06:34 by bbeldame          #+#    #+#              #
-#    Updated: 2017/07/16 19:09:53 by bbeldame         ###   ########.fr        #
+#    Updated: 2017/07/25 19:30:19 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,8 @@ SRCS =	ft_putchar.c \
 		free_splited_str.c \
 		err_found.c \
 		len_of_tab.c \
-		get_next_line.c
+		get_next_line.c \
+		ft_abs.c
 
 OBJS =	$(SRCS:.c=.o)
 

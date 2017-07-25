@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/18 22:19:50 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/23 00:32:08 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/25 19:21:34 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		loop(t_fill *env)
 	env->nb_loop += 1;
 	debug_new_round(env);
 	get_next_line(0, &str);
+	ft_putendl_fd(str, env->fd);
 	parse_board(env, str);
 	get_next_line(0, &str);
 	parse_piece(env, str);

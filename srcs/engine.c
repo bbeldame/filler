@@ -5,19 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/23 00:04:24 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/23 01:21:38 by bbeldame         ###   ########.fr       */
+/*   Created: 2017/07/25 20:31:05 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/07/25 20:56:26 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-int				compute_score(t_fill *env, int y, int x)
+static int		compute_dist(t_fill *env, int y, int x)
 {
-	return (1);
+	int		map_x;
+	int		map_y;
+	int		min_dist_from_enemy;
+	int		tmp;
+
+	map_y = 0;
+	min_dist_from_enemy = -1;
+	while (map_y < BOARD.max_y)
+	{
+		map_x = 0;
+		while (map_x < BOARD.max_x)
+		{
+			if (BOARD.tab[map_y][map_x] == 2)
+			{
+				tmp = ft_abs(map_y - y) + ft_abs(map_x - x);
+				if (min_dist_from_enemy == -1 || tmp < min_dist_from_enemy)
+					min_dist_from_enemy = tmp;
+			}
+			map_x++;
+		}
+		map_y++;
+	}
+	return (min_dist_from_enemy);
 }
 
-int				piece_can_be_placed(t_fill *env, board_y, board_x)
+static int		piece_can_be_placed(t_fill *env, int board_y, int board_x)
 {
 	int			touch_counter;
 
@@ -33,8 +55,8 @@ int				piece_can_be_placed(t_fill *env, board_y, board_x)
 			if (PIECE.tab[PIECE.current_y][PIECE.current_x] &&
 				PIECE.current_x + BOARD.current_x < BOARD.max_x &&
 				PIECE.current_y + BOARD.current_y < BOARD.max_y &&
-				PIECE.max_x + BOARD.current_x <= BOARD.max_x && // do on trimmed piece
-				PIECE.max_y + BOARD.current_y <= BOARD.max_y) // do on trimmed piece
+				PIECE.max_x + BOARD.current_x <= BOARD.max_x &&
+				PIECE.max_y + BOARD.current_y <= BOARD.max_y)
 			{
 				if (BOARD.tab[BOARD.current_y + PIECE.current_y][BOARD.current_x + PIECE.current_x] == 1)
 					touch_counter++;
@@ -53,28 +75,25 @@ t_choice		find_placement(t_fill *env)
 	int			x;
 	int			y;
 	t_choice	choice;
-	int			tmp_score;
+	int			tmp_dist;
 
-	choice.score = 0;
+	choice.dist = -1;
 	y = 0;
 	while (y < BOARD.max_y)
 	{
-		x = 0;
-		while (x < BOARD.max_x)
-		{
+		x = -1;
+		while (x++ < BOARD.max_x)
 			if (piece_can_be_placed(env, y, x))
 			{
-				tmp_score = compute_score(env, y, x);
-				if (tmp_score > choice.score)
+				tmp_dist = compute_dist(env, y, x);
+				if (tmp_dist < choice.dist || choice.dist == -1)
 				{
 					choice.x = x;
 					choice.y = y;
-					choice.score = tmp_score;
+					choice.dist = tmp_dist;
 					debug_print_score(env, choice);
 				}
 			}
-			x++;
-		}
 		y++;
 	}
 	return (choice);

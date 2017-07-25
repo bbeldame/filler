@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/15 22:22:08 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/23 00:55:33 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/25 20:33:15 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	debug_print_score(t_fill *env, t_choice choice)
 	ft_putstr_fd("\ny = ", env->fd);
 	ft_putnbr_fd(choice.y, env->fd);
 	ft_putstr_fd("\nscore = ", env->fd);
-	ft_putnbr_fd(choice.score, env->fd);
+	ft_putnbr_fd(choice.dist, env->fd);
 	ft_putstr_fd("\n", env->fd);
 	ft_putendl_fd("==============<\\ CHOICE_DEBUG />===============", env->fd);
 }

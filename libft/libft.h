@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 19:08:39 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/16 19:10:15 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/25 19:30:29 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ int					len_of_tab(char **tab);
 void				err_found(char *str);
 void				free_splited_str(char **str);
 int					get_next_line(int const fd, char **line);
+int					ft_abs(int a);
 
 #endif
