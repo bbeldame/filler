@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/18 22:19:50 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/25 19:21:34 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/26 19:55:24 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ void		send_coor(int y, int x)
 	ft_putchar('\n');
 }
 
+/*
+** Endless loop to get the infos from the VM on each round
+** we make a strstr to verify that the VM send us the board
+** or the piece. Basically this is the whole filler :
+** Parse Board - Parse Piece - Find Placement - Print it
+*/
+
 void		loop(t_fill *env)
 {
 	char		*str;
@@ -33,8 +40,11 @@ void		loop(t_fill *env)
 	debug_new_round(env);
 	get_next_line(0, &str);
 	ft_putendl_fd(str, env->fd);
-	parse_board(env, str);
-	get_next_line(0, &str);
+	if (ft_strstr(str, "Plateau") != NULL)
+	{
+		parse_board(env, str);
+		get_next_line(0, &str);
+	}
 	parse_piece(env, str);
 	choice = find_placement(env);
 	send_coor(choice.y, choice.x);

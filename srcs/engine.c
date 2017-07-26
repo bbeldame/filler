@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 20:31:05 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/25 20:56:26 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/26 20:04:29 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,17 @@ static int		compute_dist(t_fill *env, int y, int x)
 	return (min_dist_from_enemy);
 }
 
-static int		piece_can_be_placed(t_fill *env, int board_y, int board_x)
+/*
+** y and x are the coordinate inside the board
+** we count if the piece touch the board, if it touch
+** only once, we can place it, if it touch the enemy,
+** it can't be placed, so we add 2 to the touch_counter
+*/
+
+static int		piece_can_be_placed(t_fill *env, int y, int x)
 {
 	int			touch_counter;
 
-	BOARD.current_x = board_x;
-	BOARD.current_y = board_y;
 	PIECE.current_y = 0;
 	touch_counter = 0;
 	while (PIECE.current_y < PIECE.max_y)
@@ -53,14 +58,14 @@ static int		piece_can_be_placed(t_fill *env, int board_y, int board_x)
 		while (PIECE.current_x < PIECE.max_x)
 		{
 			if (PIECE.tab[PIECE.current_y][PIECE.current_x] &&
-				PIECE.current_x + BOARD.current_x < BOARD.max_x &&
-				PIECE.current_y + BOARD.current_y < BOARD.max_y &&
-				PIECE.max_x + BOARD.current_x <= BOARD.max_x &&
-				PIECE.max_y + BOARD.current_y <= BOARD.max_y)
+				PIECE.current_x + x < BOARD.max_x &&
+				PIECE.current_y + y < BOARD.max_y &&
+				PIECE.max_x + x <= BOARD.max_x &&
+				PIECE.max_y + y <= BOARD.max_y)
 			{
-				if (BOARD.tab[BOARD.current_y + PIECE.current_y][BOARD.current_x + PIECE.current_x] == 1)
+				if (BOARD.tab[y + PIECE.current_y][x + PIECE.current_x] == 1)
 					touch_counter++;
-				if (BOARD.tab[BOARD.current_y + PIECE.current_y][BOARD.current_x + PIECE.current_x] == 2)
+				if (BOARD.tab[y + PIECE.current_y][x + PIECE.current_x] == 2)
 					touch_counter += 2;
 			}
 			PIECE.current_x++;
