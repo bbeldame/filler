@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 20:31:05 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/26 20:04:29 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/26 21:00:40 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ t_choice		find_placement(t_fill *env)
 	t_choice	choice;
 	int			tmp_dist;
 
+	choice.x = 0;
+	choice.y = 0;
 	choice.dist = -1;
-	y = 0;
-	while (y < BOARD.max_y)
-	{
-		x = -1;
+	y = -1;
+	while (y++ < BOARD.max_y && (x = -1) == -1)
 		while (x++ < BOARD.max_x)
 			if (piece_can_be_placed(env, y, x))
 			{
@@ -99,7 +99,5 @@ t_choice		find_placement(t_fill *env)
 					debug_print_score(env, choice);
 				}
 			}
-		y++;
-	}
 	return (choice);
 }

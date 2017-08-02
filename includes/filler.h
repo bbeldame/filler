@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 22:10:41 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/25 20:30:44 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/07/26 20:53:27 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void			parse_board(t_fill *env, char *line);
 void			parse_piece(t_fill *env, char *line);
 int				*parse_board_line(t_fill *env, char *line, int index);
 int				*parse_piece_line(t_fill *env, char *line);
-void			send_coor(int y, int x);
 t_choice		find_placement(t_fill *env);
 
 /*
