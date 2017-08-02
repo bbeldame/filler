@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 20:31:05 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/07/26 21:00:40 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/02 22:40:55 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ static int		compute_dist(t_fill *env, int y, int x)
 		map_x = 0;
 		while (map_x < BOARD.max_x)
 		{
-			if (BOARD.tab[map_y][map_x] == 2)
+			if (BOARD.tab[map_y][map_x] >= 2)
 			{
 				tmp = ft_abs(map_y - y) + ft_abs(map_x - x);
+				tmp -= BOARD.tab[map_y][map_x];
 				if (min_dist_from_enemy == -1 || tmp < min_dist_from_enemy)
 					min_dist_from_enemy = tmp;
 			}
@@ -65,7 +66,7 @@ static int		piece_can_be_placed(t_fill *env, int y, int x)
 			{
 				if (BOARD.tab[y + PIECE.current_y][x + PIECE.current_x] == 1)
 					touch_counter++;
-				if (BOARD.tab[y + PIECE.current_y][x + PIECE.current_x] == 2)
+				if (BOARD.tab[y + PIECE.current_y][x + PIECE.current_x] >= 2)
 					touch_counter += 2;
 			}
 			PIECE.current_x++;
