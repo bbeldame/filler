@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/14 00:33:29 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/02 22:14:55 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/13 17:39:54 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** from 2 to 9, 9 being the last piece positioned, etc
 */
 
-int		get_enemy_number_placement(t_fill *env, int y, int x)
+int		get_enemy_number_placement(t_env *env, int y, int x)
 {
 	if (env->nb_loop == 1 || BOARD.tab[y][x] == 0)
 		return (9);
@@ -26,7 +26,7 @@ int		get_enemy_number_placement(t_fill *env, int y, int x)
 	return (2);
 }
 
-int		parse_char_to_int(t_fill *env, char c, int y, int x)
+int		parse_char_to_int(t_env *env, char c, int y, int x)
 {
 	if (c == '*')
 		return (1);
@@ -37,7 +37,7 @@ int		parse_char_to_int(t_fill *env, char c, int y, int x)
 	return (0);
 }
 
-int		*parse_piece_line(t_fill *env, char *line)
+int		*parse_piece_line(t_env *env, char *line)
 {
 	int		*parsed_line;
 	int		i;
@@ -53,7 +53,7 @@ int		*parse_piece_line(t_fill *env, char *line)
 	return (parsed_line);
 }
 
-int		*parse_board_line(t_fill *env, char *line, int index)
+int		*parse_board_line(t_env *env, char *line, int index)
 {
 	int		*parsed_line;
 	int		i;

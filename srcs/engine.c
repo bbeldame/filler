@@ -6,13 +6,13 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 20:31:05 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/02 22:40:55 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/13 17:33:33 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-static int		compute_dist(t_fill *env, int y, int x)
+static int		compute_dist(t_env *env, int y, int x)
 {
 	int		map_x;
 	int		map_y;
@@ -47,7 +47,7 @@ static int		compute_dist(t_fill *env, int y, int x)
 ** it can't be placed, so we add 2 to the touch_counter
 */
 
-static int		piece_can_be_placed(t_fill *env, int y, int x)
+static int		piece_can_be_placed(t_env *env, int y, int x)
 {
 	int			touch_counter;
 
@@ -76,7 +76,7 @@ static int		piece_can_be_placed(t_fill *env, int y, int x)
 	return (touch_counter == 1) ? 1 : 0;
 }
 
-t_choice		find_placement(t_fill *env)
+t_choice		find_placement(t_env *env)
 {
 	int			x;
 	int			y;

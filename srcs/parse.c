@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 21:33:08 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/02 22:03:53 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/13 17:23:27 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,31 @@
 ** Basically it deletes every useless lines and columns from the piece
 */
 
-int		**trim_piece(t_fill *env)
+void	trim_piece(t_env *env)
 {
-	return (env->fd); //todo
+	t_cleaner	cleaner;
+	int			y;
+	int			x;
+
+	cleaner = get_piece_cleaner(env);
+	if (!(TRIM.tab = (int **)malloc(sizeof(int *) * TRIM.max_y)))
+		return ;
+	y = cleaner.min_y;
+	while (y <= cleaner.max_y)
+	{
+		x = cleaner.min_x;
+		TRIM.tab[y - cleaner.min_y] = (int *)malloc(sizeof(int) * TRIM.max_x);
+		while (x <= cleaner.max_x)
+		{
+			TRIM.tab[y - cleaner.min_y][x - cleaner.min_x] = 0;
+			if (PIECE.tab[y][x])
+			{
+				TRIM.tab[y - cleaner.min_y][x - cleaner.min_x] = 1;
+			}
+			x++;
+		}
+		y++;
+	}
 }
 
 /*
@@ -51,7 +73,7 @@ void	parse_y_x(int *max_y, int *max_x, char *str)
 ** get the player number, one or two
 */
 
-void	parse_player(t_fill *env, char *str)
+void	parse_player(t_env *env, char *str)
 {
 	if (str[10] == '1')
 		env->player = 1;
@@ -66,7 +88,7 @@ void	parse_player(t_fill *env, char *str)
 ** we make an empty gnl to get rid off "    0123456789"
 */
 
-void	parse_board(t_fill *env, char *line)
+void	parse_board(t_env *env, char *line)
 {
 	char	*str;
 	int		i;
@@ -95,7 +117,7 @@ void	parse_board(t_fill *env, char *line)
 ** Save the piece as a **int, free the previous piece on each call
 */
 
-void	parse_piece(t_fill *env, char *line)
+void	parse_piece(t_env *env, char *line)
 {
 	char	*str;
 	int		i;
@@ -114,5 +136,6 @@ void	parse_piece(t_fill *env, char *line)
 			return ;
 		i++;
 	}
+	trim_piece(env);
 	debug_print_piece(env);
 }

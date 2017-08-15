@@ -31,7 +31,7 @@ void		send_coor(int y, int x)
 ** Parse Board - Parse Piece - Find Placement - Print it
 */
 
-void		loop(t_fill *env)
+void		loop(t_env *env)
 {
 	char		*str;
 	t_choice	choice;
@@ -50,7 +50,7 @@ void		loop(t_fill *env)
 	send_coor(choice.y, choice.x);
 }
 
-void		init(t_fill *env)
+void		init(t_env *env)
 {
 	env->nb_loop = 0;
 	BOARD.max_x = 0;
@@ -65,7 +65,7 @@ void		init(t_fill *env)
 int			main(void)
 {
 	char	*line;
-	t_fill	env;
+	t_env	env;
 
 	env.fd = open("filler.log", O_WRONLY | O_CREAT);
 	debug_init(&env);

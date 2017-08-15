@@ -1,4 +1,16 @@
-NAME = msakwins.filler
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/08/13 16:22:30 by bbeldame          #+#    #+#              #
+#    Updated: 2017/08/13 16:22:32 by bbeldame         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = bbeldame.filler
 
 FLAGS = -Wall -Wextra #-Werror
 	
@@ -38,7 +50,7 @@ $(LIBFT):
 
 $(NAME): $(LIBFT) obj $(OBJS)
 		@gcc $(OBJS) $(LIBFT) -lm -o $(NAME)
-			@echo "$(GREEN)---------blblblbl compiled---------$(NC)"
+			@echo "$(GREEN)---------Filler compiled----------$(NC)"
 
 norme:
 		@norminette includes srcs
@@ -50,6 +62,6 @@ clean:
 fclean:	clean
 		@rm -f $(NAME)
 		@make fclean -C $(LIBFTDIR)
-		@echo "$(GREEN)----blblblbl removed completely----$(NC)"
+		@echo "$(GREEN)-----Filler removed completely----$(NC)"
 
 re: fclean all
