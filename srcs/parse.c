@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 21:33:08 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/13 17:23:27 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/15 19:30:57 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,23 @@
 
 void	trim_piece(t_env *env)
 {
-	t_cleaner	cleaner;
 	int			y;
 	int			x;
 
-	cleaner = get_piece_cleaner(env);
+	CLEAN = get_piece_cleaner(env);
 	if (!(TRIM.tab = (int **)malloc(sizeof(int *) * TRIM.max_y)))
 		return ;
-	y = cleaner.min_y;
-	while (y <= cleaner.max_y)
+	y = CLEAN.min_y;
+	while (y <= CLEAN.max_y)
 	{
-		x = cleaner.min_x;
-		TRIM.tab[y - cleaner.min_y] = (int *)malloc(sizeof(int) * TRIM.max_x);
-		while (x <= cleaner.max_x)
+		x = CLEAN.min_x;
+		TRIM.tab[y - CLEAN.min_y] = (int *)malloc(sizeof(int) * TRIM.max_x);
+		while (x <= CLEAN.max_x)
 		{
-			TRIM.tab[y - cleaner.min_y][x - cleaner.min_x] = 0;
+			TRIM.tab[y - CLEAN.min_y][x - CLEAN.min_x] = 0;
 			if (PIECE.tab[y][x])
 			{
-				TRIM.tab[y - cleaner.min_y][x - cleaner.min_x] = 1;
+				TRIM.tab[y - CLEAN.min_y][x - CLEAN.min_x] = 1;
 			}
 			x++;
 		}

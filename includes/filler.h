@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 22:10:41 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/13 16:32:16 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/15 19:30:37 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define BOARD env->board
 # define PIECE env->piece
 # define TRIM env->trimmed_piece
+# define CLEAN env->cleaner
 
 typedef struct	s_choice
 {
@@ -56,6 +57,7 @@ typedef struct	s_filler
 	t_mop		piece;
 	t_mop		trimmed_piece;
 	t_mop		board;
+	t_cleaner	cleaner;
 }				t_env;
 
 void			free_board_or_piece(t_mop *mop);

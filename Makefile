@@ -6,13 +6,13 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/13 16:22:30 by bbeldame          #+#    #+#              #
-#    Updated: 2017/08/13 16:22:32 by bbeldame         ###   ########.fr        #
+#    Updated: 2017/08/26 14:07:27 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = bbeldame.filler
 
-FLAGS = -Wall -Wextra #-Werror
+FLAGS = -Wall -Wextra -Werror
 	
 LIBFTA = libft.a
 
